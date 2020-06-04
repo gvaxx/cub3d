@@ -4,11 +4,11 @@
 #define RAD_TO_DEG(rad) (M_PI*deg/180)
 
 
-void print_triangle(void *start_img, int *plots, int color)
+void print_triangle(void *start_img, int *plots, int color, t_game  *game)
 {
-	print_vector(start_img, color, plots, &plots[2]);
-	print_vector(start_img, color, &plots[2], &plots[4]);
-	print_vector(start_img, color, &plots[4], plots);
+	line(game, plots, &plots[2]);
+	line(game, &plots[2], &plots[4]);
+	line(game, &plots[4], plots);
 }
 
 void plot_scale(int *plots, float size)
@@ -77,7 +77,7 @@ int	key_win(int key, t_game *game)
 	if (key == 113)
 		rotate_triangle(game->plot, DEG_TO_RAD(10));
 	background(game, 200, 200, 0);
-	print_triangle(game->center_img, game->plot, game->color);
+	print_triangle(game->center_img, game->plot, game->color, game);
 	mlx_put_image_to_window(game->mlx_init, game->window, game->img, 0, 0);	
 }
 
@@ -89,7 +89,7 @@ int	mouse_win(int button,int x,int y, t_game *game)
 	{
 		game->color = random();
 		background(game, 200, 200, 0);
-		print_triangle(game->center_img, game->plot, game->color);
+		print_triangle(game->center_img, game->plot, game->color, game);
 		mlx_put_image_to_window(game->mlx_init, game->window, game->img, 0, 0);	
 		return(1);
 	}
@@ -97,7 +97,7 @@ int	mouse_win(int button,int x,int y, t_game *game)
 	{
 		plot_scale(game->plot, 1.25);
 		background(game, 200, 200, 0);
-		print_triangle(game->center_img, game->plot, game->color);
+		print_triangle(game->center_img, game->plot, game->color, game);
 		mlx_put_image_to_window(game->mlx_init, game->window, game->img, 0, 0);	
 		return(1);
 	}
@@ -105,7 +105,7 @@ int	mouse_win(int button,int x,int y, t_game *game)
 	{
 		plot_scale(game->plot, 0.75);
 		background(game, 200, 200, 0);
-		print_triangle(game->center_img, game->plot, game->color);
+		print_triangle(game->center_img, game->plot, game->color, game);
 		mlx_put_image_to_window(game->mlx_init, game->window, game->img, 0, 0);	
 		return(1);
 	}
@@ -122,7 +122,7 @@ int main()
 		20, 50
 	};
 	t_game game;
-	unsigned int		color = 0x01FF0000;
+	unsigned int		color = 0xFFFFFFFF;
 	game.plot = plots;
 	game.mlx_init = mlx_init();
 	game.window = mlx_new_window(game.mlx_init, 200, 200, "hello world");
@@ -132,7 +132,7 @@ int main()
 	game.color = color;
 //	printf("%i\n", plots[0][0]);
 //	rotate_triangle(plots, DEG_TO_RAD(270));
-	print_triangle(game.center_img, plots, 0x01FF0000);
+	print_triangle(game.center_img, plots, 0xFFFFFFFF, &game);
 //	background(&game, 200, 200, 0x01FF0000);
 	mlx_put_image_to_window (game.mlx_init, game.window, game.img, 0, 0);
 	mlx_key_hook(game.window, key_win, &game);

@@ -6,11 +6,52 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 19:56:07 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/04 20:00:05 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/04 22:34:54 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	print_line(t_game  *game, t_line line, int size)
+{
+	while(size != -1)
+	{
+		if(line.y < 100 && line.y > -100 && line.x < 100 && line.x > -100)
+			print_img_pxl(&game->center_img[line.x * 4 + (game->len_of_line * line.y)], 0xFFFFFFFF);
+		line.error = line.error + line.deltaerr;
+		while (line.error >= line.deltax + 1)
+		{
+			line.y = line.y + line.diry;
+			if(line.y < 100 && line.y > -100 && line.x < 100 && line.x > -100)
+				print_img_pxl(&game->center_img[line.x * 4 + (game->len_of_line * line.y)], 0xFFFFFFFF);
+			line.error = line.error - (line.deltax + 1);
+		}
+		size--;
+		line.x += line.dirx;
+	}
+}
+
+void	line(t_game  *game, int *vector1, int *vector2)
+{
+	t_line line;
+	
+	line.deltax = abs(vector2[0] - vector1[0]);
+	line.error = 0;
+	line.deltaerr = abs(vector2[1] - vector1[1]) + 1;
+	line.y = vector1[1];
+	line.x = vector1[0];
+	line.diry = vector2[1] - vector1[1];
+	if (line.diry > 0)
+		line.diry = 1;
+	if (line.diry < 0)
+		line.diry = -1;
+	line.dirx = vector2[0] - vector1[0];
+	if (line.dirx > 0)
+		line.dirx = 1;
+	if (line.dirx < 0)
+		line.dirx = -1;
+	print_line(game, line, line.deltax);
+}
 
 void print_img_pxl(char *img, unsigned int color)
 {
@@ -107,5 +148,4 @@ void print_vector(char *start_img, unsigned int color, int *plot_1, int *plot_2)
 	}
 	else
 		vector_y(start_img, color, plot_1, plot_2);
-	
 }

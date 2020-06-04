@@ -77,11 +77,15 @@ int main()
 	game.x = 0;
 	game.y = 0;
 	printf("%X\n", game.color);
-	print_cub(game.strt_img, game.color, game.x, game.y, 20);
+	int vectors[2][2] = {
+		{50,12}, {10,30}
+		};
+	line(&game, vectors[0], vectors[1]);
+//	print_cub(game.strt_img, game.color, game.x, game.y, 20);
 	mlx_put_image_to_window (mlx, wnd, img, game.y, game.x);
 
-	mlx_key_hook(wnd, key_win, &game);
-	mlx_mouse_hook(wnd, mouse_win, &game);
+//	mlx_key_hook(wnd, key_win, &game);
+//	mlx_mouse_hook(wnd, mouse_win, &game);
 
 	mlx_loop(mlx);
 	return(0);
