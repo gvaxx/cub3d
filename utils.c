@@ -6,7 +6,7 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 19:56:07 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/04 22:34:54 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/07 17:10:46 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	print_line(t_game  *game, t_line line, int size)
 	while(size != -1)
 	{
 		if(line.y < 100 && line.y > -100 && line.x < 100 && line.x > -100)
-			print_img_pxl(&game->center_img[line.x * 4 + (game->len_of_line * line.y)], 0xFFFFFFFF);
+			print_img_pxl(&game->center_img[line.x * 4 + (game->len_of_line * line.y)], game->color);
 		line.error = line.error + line.deltaerr;
-		while (line.error >= line.deltax + 1)
+		while (line.error > line.deltax + 1)
 		{
 			line.y = line.y + line.diry;
 			if(line.y < 100 && line.y > -100 && line.x < 100 && line.x > -100)
-				print_img_pxl(&game->center_img[line.x * 4 + (game->len_of_line * line.y)], 0xFFFFFFFF);
+				print_img_pxl(&game->center_img[line.x * 4 + (game->len_of_line * line.y)], game->color);
 			line.error = line.error - (line.deltax + 1);
 		}
 		size--;
@@ -138,6 +138,34 @@ static	void vector_y(char *start_img, unsigned int color, int *plot_1, int *plot
 			print_img_pxl(&start_img[(x * 4) + y * 800], color);
 		y++;
 	}
+}
+
+int** alloc_2d(int m, int n)
+{
+    int** arr;
+    int i;
+   
+	i = 0;
+    if ((arr = malloc(m * sizeof(*arr))) == 0)
+		return (NULL);
+    while (i < m)
+        if((arr[i++] = malloc(n * sizeof(**arr))) == 0)
+			return(NULL);
+    return (arr);
+}
+
+float** alloc_2df(int m, int n)
+{
+    float** arr;
+    int i;
+   
+	i = 0;
+    if ((arr = malloc(m * sizeof(*arr))) == 0)
+		return (NULL);
+    while (i < m)
+        if((arr[i++] = malloc(n * sizeof(**arr))) == 0)
+			return(NULL);
+    return (arr);
 }
 
 void print_vector(char *start_img, unsigned int color, int *plot_1, int *plot_2)
