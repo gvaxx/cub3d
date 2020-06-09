@@ -6,7 +6,7 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 19:56:07 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/07 17:10:46 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/08 17:38:04 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	print_line(t_game  *game, t_line line, int size)
 {
 	while(size != -1)
 	{
-		if(line.y < 100 && line.y > -100 && line.x < 100 && line.x > -100)
+		if(line.y < 900 && line.y > -1 && line.x < 900 && line.x > -1)
 			print_img_pxl(&game->center_img[line.x * 4 + (game->len_of_line * line.y)], game->color);
 		line.error = line.error + line.deltaerr;
 		while (line.error > line.deltax + 1)
 		{
 			line.y = line.y + line.diry;
-			if(line.y < 100 && line.y > -100 && line.x < 100 && line.x > -100)
+			if(line.y < 900 && line.y > -1 && line.x < 900 && line.x > -1)
 				print_img_pxl(&game->center_img[line.x * 4 + (game->len_of_line * line.y)], game->color);
 			line.error = line.error - (line.deltax + 1);
 		}

@@ -6,7 +6,7 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 15:03:51 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/07 17:11:39 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/09 17:28:34 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct	s_object
 	float angle;
 	int dx;
 	int dy;
+	int distance;
 	float scale;
 	int **multiplex_m;
 	
@@ -42,9 +43,14 @@ typedef struct	s_game
 	int		edge;
 	int		endian;
 	unsigned int color;
-	int x;
-	int y;
+	int px;
+	int py;
+	float pa;
+	float pdx;
+	float pdy;
 	t_object object;
+	int *map;
+	void *new_game;
 
 }				t_game;
 
