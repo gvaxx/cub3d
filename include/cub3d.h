@@ -6,7 +6,7 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 15:03:51 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/25 15:07:08 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/28 16:35:58 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define WRONG_NUM_ARG -5
 # define WRONG_ARG -6
 # define TEXTURE_FAILED -7
+# define WRONG_SECOND_ARGUMENT -8
 # define MAX_WIDTH 1600
 # define MAX_HEIGHT 900
 # define PI2 3.14159/2
@@ -29,6 +30,9 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 typedef struct	s_sprite
 {
@@ -144,7 +148,7 @@ void			print_vector(char *start_img, unsigned int color, int
 *plot_1, int *plot_2);
 int				map_manager(int fd, char *line, t_info *game_info);
 void			line(t_game *game, int *vector1, int *vector2);
-t_game			*window_init(t_info *game_info);
+int				window_init(t_game *game);
 void			print_ceil(int x, int y, int length, t_game *game);
 void			print_floor(int x, int y, int length, t_game *game);
 void			sprite_handler(t_game *game, float *depth_buffer);
@@ -165,6 +169,9 @@ int				resolution_handler(char *line, t_info *game_info);
 char			*next_number(char *line);
 void			distance_handler(t_game *game, t_line *line);
 int				error_handler(int error_num);
-void			destroy_game(t_game *game);
+int			destroy_game(int win, t_game *game);
+int		screenshot(t_game *game);
+void		first_frame(t_game *game);
+int			fill_texture(t_image *image, char *name, void *mlx_init);
 
 #endif

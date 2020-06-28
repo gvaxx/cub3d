@@ -6,7 +6,7 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 23:09:29 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/15 20:23:55 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/25 18:16:45 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	push(char **buf, char **line)
 			return (-1);
 		return (1);
 	}
-	*line = ft_strnjoin(*line, *buf, 10);
+	*line = ft_strnjoin(*line, *buf, BUFFER_SIZE);
 	return (0);
 }
 
@@ -54,16 +54,16 @@ int	get_next_line(int fd, char **line)
 	int			n;
 	int			p;
 
-	if ((read(fd, temp, 0) < 0) || !line ||
+	if (BUFFER_SIZE < 1 || fd < 0 || (read(fd, temp, 0) < 0) || !line ||
 	!(*line = ft_strdup("")))
 		return (-1);
 	if (*buf)
 		if ((p = push(buf, line)))
 			return (p == 1 ? 1 : free_all(buf, line, 1));
 	free(*buf);
-	if (!(*buf = malloc(sizeof(char *) * (10 + 1))))
+	if (!(*buf = malloc(sizeof(char *) * (BUFFER_SIZE + 1))))
 		return (-1);
-	while (0 < (n = read(fd, buf[0], 10)))
+	while (0 < (n = read(fd, buf[0], BUFFER_SIZE)))
 	{
 		buf[0][n] = '\0';
 		if ((p = push(buf, line)))

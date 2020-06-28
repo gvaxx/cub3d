@@ -6,7 +6,7 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 23:51:06 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/25 14:46:48 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/28 16:41:20 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int	right_handler(t_game *game)
 
 int	key_win(int key, t_game *game)
 {
-	printf("%i\n", key);
 	if (key == 119)
 		if (forward_handler(game) == 0)
 			return (0);
@@ -112,6 +111,11 @@ int	key_win(int key, t_game *game)
 	{
 		game->pa = is_full_circle(game->pa + 0.05);
 		bias(game);
+	}
+	if (key == 65307)
+	{
+		destroy_game(1, game);
+		return (0);
 	}
 	drawrays3d(game);
 	mlx_put_image_to_window(game->mlx_init,

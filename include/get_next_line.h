@@ -6,12 +6,13 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/16 23:28:30 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/13 18:07:16 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/25 17:48:56 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_GET_NEXT_LINE_H
 # define FT_GET_NEXT_LINE_H
+# define BUFFER_SIZE 10
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>

@@ -6,7 +6,7 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 01:11:06 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/25 14:34:38 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/28 16:33:16 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		cub_file_parser(char *line, int fd, t_info *game_info)
 	return (cub_file_parser2(line, fd, game_info));
 }
 
-int	resolution_handler(char *line, t_info *game_info)
+int		resolution_handler(char *line, t_info *game_info)
 {
 	game_info->resolution_x = ft_atoi(line);
 	line = next_number(line);

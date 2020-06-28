@@ -6,7 +6,7 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:21:06 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/25 14:16:03 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/28 16:35:18 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,13 @@ int		map_manager(int fd, char *line, t_info *game_info)
 		if (ft_strlen(map[height++]) > max_width)
 			max_width = ft_strlen(map[height - 1]);
 	}
+	free(map[height]);
 	if (add_white_space(map, height, max_width) < 0)
 		return (error_handler(MALLOC_MAP_ERROR));
 	if ((check_map(map, height, max_width) == -1))
-		return (error_handler(HANDLE_MAP_ERROR)); 
+		return (error_handler(HANDLE_MAP_ERROR));
 	game_info->map = map;
 	game_info->map_height = height;
 	game_info->map_width = max_width;
-	return (0);
+	return (1);
 }

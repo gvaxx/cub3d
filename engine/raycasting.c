@@ -6,7 +6,7 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 01:26:04 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/25 15:06:09 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/28 16:35:28 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	drawrays3d(t_game *game)
 	sprite_handler(game, depth_buffer);
 }
 
-int	fill_texture(t_image *image, char *name, void *mlx_init)
+int		fill_texture(t_image *image, char *name, void *mlx_init)
 {
-	if((image->img = mlx_xpm_file_to_image(mlx_init, name,
+	if ((image->img = mlx_xpm_file_to_image(mlx_init, name,
 	&image->width, &image->height)) == NULL ||
 	(image->strt_img = mlx_get_data_addr(image->img,
 	&image->bppx, &image->len_of_line, &image->endian)) == NULL)
@@ -80,27 +80,27 @@ void	first_frame(t_game *game)
 	game->main_img.img, 0, 0);
 }
 
-t_game		*window_init(t_info *game_info)
+int		window_init(t_game *game)
 {
-	t_game game;
-
-	game.game_info = *game_info;
-	game.mlx_init = mlx_init();
-	game.window = mlx_new_window(game.mlx_init, game_info->resolution_x,
-	game_info->resolution_y, "cub3d");
-	game.main_img.img = mlx_new_image(game.mlx_init, game_info->resolution_x,
-	game_info->resolution_y);
-	game.main_img.strt_img = mlx_get_data_addr(game.main_img.img,
-	&game.main_img.bppx, &game.main_img.len_of_line, &game.main_img.endian);
-	if (fill_texture(&game.texture_ea, game_info->texture_ea, game.mlx_init) < 0 ||
-	fill_texture(&game.texture_no, game_info->texture_no, game.mlx_init) < 0 ||
-	fill_texture(&game.texture_we, game_info->texture_we, game.mlx_init) < 0 ||
-	fill_texture(&game.texture_so, game_info->texture_so, game.mlx_init) < 0 ||
-	fill_texture(&game.texture_sprite, game_info->texture_sprite,
-	game.mlx_init) < 0 )
+	game->mlx_init = mlx_init();
+	game->window = mlx_new_window(game->mlx_init, game->game_info.resolution_x,
+	game->game_info.resolution_y, "cub3d");
+	game->main_img.img = mlx_new_image(game->mlx_init,
+	game->game_info.resolution_x, game->game_info.resolution_y);
+	game->main_img.strt_img = mlx_get_data_addr(game->main_img.img,
+	&game->main_img.bppx, &game->main_img.len_of_line, &game->main_img.endian);
+	if (fill_texture(&game->texture_ea, game->game_info.texture_ea,
+	game->mlx_init) < 0 || fill_texture(&game->texture_no,
+	game->game_info.texture_no, game->mlx_init) < 0 ||
+	fill_texture(&game->texture_we, game->game_info.texture_we,
+	game->mlx_init) < 0 ||
+	fill_texture(&game->texture_so, game->game_info.texture_so,
+	game->mlx_init) < 0 ||
+	fill_texture(&game->texture_sprite, game->game_info.texture_sprite,
+	game->mlx_init) < 0)
 		return (error_handler(TEXTURE_FAILED));
-	first_frame(&game);
-	mlx_hook(game.window, 2, 1L << 0, key_win, &game);
-	mlx_loop(game.mlx_init);
-	return (&game);
+	first_frame(game);
+	mlx_hook(game->window, 2, 1L, key_win, game);
+	mlx_hook(game->window, 17, 0L, destroy_game, game);
+	mlx_loop(game->mlx_init);
 }

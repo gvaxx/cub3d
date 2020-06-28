@@ -6,13 +6,13 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 13:53:54 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/25 14:45:25 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/28 16:21:58 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int error_handler(int error_num)
+int	error_handler(int error_num)
 {
 	if (error_num == MALLOC_MAP_ERROR)
 		write(2, "Error\nmap's malloc return 0\n", 29);
@@ -24,5 +24,7 @@ int error_handler(int error_num)
 		write(2, "Error\nwrong argument\n", 22);
 	if (error_num == TEXTURE_FAILED)
 		write(2, "Error\nwrong path to texture\n", 29);
-	return(error_num);
+	if (error_num == WRONG_SECOND_ARGUMENT)
+		write(2, "Error\nsecond argument must be \"--save\"\n", 44);
+	return (error_num);
 }
