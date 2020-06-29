@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
+/*   By: mcaptain <mcaptain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 15:03:51 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/28 16:35:58 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/29 15:59:28 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 # define WRONG_ARG -6
 # define TEXTURE_FAILED -7
 # define WRONG_SECOND_ARGUMENT -8
-# define MAX_WIDTH 1600
-# define MAX_HEIGHT 900
+# define MAX_WIDTH 5120/2
+# define MAX_HEIGHT 2880/2
 # define PI2 3.14159/2
 # define PI3 3*3.14159/2
 # define DR M_PI/180
-# include <mlx.h>
+# include "mlx.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -44,7 +44,7 @@ typedef struct	s_sprite
 typedef struct	s_image
 {
 	void			*img;
-	unsigned char	*strt_img;
+	char	*strt_img;
 	int				len_of_line;
 	int				bppx;
 	int				endian;
@@ -124,15 +124,15 @@ typedef struct	s_line
 {
 	float			dist;
 	float			x_percent;
-	unsigned char	*start_texture;
+	char	*start_texture;
 	t_image			*texture;
 	float			ra;
 }				t_line;
 
 void			fill_x_params(t_game *game, t_param *x_param, float ra);
 float			is_full_circle(float ra);
-void			replace_pixel(unsigned char *convert_img,
-unsigned char *source_img);
+void			replace_pixel(char *convert_img,
+char *source_img);
 float			dist(float ax, float ay, float bx, float by);
 void			fill_y_params(t_game *game, t_param *y_param,
 float ra);

@@ -6,7 +6,7 @@
 /*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:06:15 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/28 16:33:04 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/29 16:37:42 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	bmp_frame(t_game *game)
 
 int		screenshot(t_game *game)
 {
+	printf("ok\n");
 	game->mlx_init = mlx_init();
 	game->main_img.img = mlx_new_image(game->mlx_init,
 	game->game_info.resolution_x, game->game_info.resolution_y);

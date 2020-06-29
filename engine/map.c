@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
+/*   By: mcaptain <mcaptain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:21:06 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/28 16:35:18 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/29 15:11:29 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		is_in_around(char *c)
 		if ((is_in_set(c[i++], "012SWEN") == 0))
 			return (-1);
 	}
+	return (0);
 }
 
 int		add_white_space(char **line, int max_height, int max_width)
@@ -102,7 +103,7 @@ int		map_manager(int fd, char *line, t_info *game_info)
 	map[height++] = line;
 	while ((get_next_line(fd, &map[height]) > 0))
 	{
-		if (ft_strlen(map[height++]) > max_width)
+		if (ft_strlen(map[height++]) > (size_t)max_width)
 			max_width = ft_strlen(map[height - 1]);
 	}
 	free(map[height]);

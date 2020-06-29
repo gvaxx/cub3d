@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
+/*   By: mcaptain <mcaptain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 00:26:17 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/25 02:06:36 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/29 15:16:21 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ float *depth_buffer, t_image sp_im)
 	fill_sprite_tech(game, &sp_t, sprite);
 	while (i < sp_t.sp_w)
 	{
-		if (i + sp_t.sp_dw >= 0 && sp_t.sp_dw + i < game->game_info.resolution_x
+		if (i + sp_t.sp_dw >= 0 && sp_t.sp_dw + i < (size_t)game->game_info.resolution_x
 		&& depth_buffer[sp_t.sp_dw + i] > sprite->dist)
 		{
 			j = 0;
 			while (j < sp_t.sp_h)
 			{
 				if (sp_t.sp_dh + j >= 0 && sp_t.sp_dh + j <
-				game->game_info.resolution_y)
+				(size_t)game->game_info.resolution_y)
 					replace_pixel(&game->main_img.strt_img[(sp_t.sp_dw + i)
 					* 4 + ((sp_t.sp_dh + j) * game->main_img.len_of_line)],
 					&sp_im.strt_img[((i * sp_im.width / sp_t.sp_w) * 4) +
@@ -60,7 +60,7 @@ float *depth_buffer, t_image sp_im)
 void	sort_sprites(t_sprite *sprite_array, size_t num)
 {
 	t_sprite	temp;
-	int			i;
+	size_t		i;
 
 	i = 1;
 	while (i < num)
@@ -77,17 +77,20 @@ void	sort_sprites(t_sprite *sprite_array, size_t num)
 
 void	sprite_dist(t_game *game)
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	while (i < game->sprites_num)
-		game->sprites_array[i++].dist = dist(game->px,
+	{
+		game->sprites_array[i].dist = dist(game->px,
 		game->py, game->sprites_array[i].x, game->sprites_array[i].y);
+		i++;
+	}
 }
 
 void	sprite_handler(t_game *game, float *depth_buffer)
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	sprite_dist(game);

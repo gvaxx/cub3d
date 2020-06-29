@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
+/*   By: mcaptain <mcaptain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 01:26:04 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/28 16:35:28 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/29 16:09:08 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	raycasting_line(t_game *game, t_line *line, int r, float *depth_buffer)
+void	raycasting_line(t_game *game, t_line *line, int r)
 {
 	int		lineh;
 	int		lineo;
@@ -36,7 +36,8 @@ void	raycasting_line(t_game *game, t_line *line, int r, float *depth_buffer)
 		y++;
 	}
 	print_floor(r, 0, lineo, game);
-	print_ceil(r, lineo + lineh, lineo, game);
+	print_ceil(r, lineo + lineh, game->game_info.resolution_y - lineo - lineh, game);
+
 }
 
 void	drawrays3d(t_game *game)
@@ -50,7 +51,7 @@ void	drawrays3d(t_game *game)
 	while (r < game->game_info.resolution_x)
 	{
 		distance_handler(game, &line);
-		raycasting_line(game, &line, r, depth_buffer);
+		raycasting_line(game, &line, r);
 		depth_buffer[r++] = line.dist;
 		line.ra = is_full_circle(line.ra + DR / game->rax);
 	}
@@ -72,6 +73,7 @@ void	first_frame(t_game *game)
 	game->sprites_num = 0;
 	num_sprites(game);
 	find_sprites(game);
+
 	find_player_position(game);
 	game->rax = game->game_info.resolution_x / (M_PI / 3) * DR;
 	bias(game);
@@ -100,7 +102,8 @@ int		window_init(t_game *game)
 	game->mlx_init) < 0)
 		return (error_handler(TEXTURE_FAILED));
 	first_frame(game);
-	mlx_hook(game->window, 2, 1L, key_win, game);
-	mlx_hook(game->window, 17, 0L, destroy_game, game);
+	mlx_hook(game->window, 2, 1L<<0, key_win, game);
+	mlx_hook(game->window, 17, 0, destroy_game, game);
 	mlx_loop(game->mlx_init);
+	return (0);
 }

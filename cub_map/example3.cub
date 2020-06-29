@@ -6,7 +6,7 @@ EA textures/east.xpm
 
 F 255, 255, 255
 C 255, 0, 255
-R    900     900
+R   5120 2880
 S textures/monster.xpm
 
 111

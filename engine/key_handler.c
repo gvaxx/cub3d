@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
+/*   By: mcaptain <mcaptain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 23:51:06 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/28 16:41:20 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/29 16:01:34 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	forward_handler(t_game *game)
 {
 	int my;
 	int mx;
-	int next_step;
 
 	my = game->py + (game->pdy * 2);
 	mx = game->px + (game->pdx * 2);
@@ -35,7 +34,6 @@ int	back_handler(t_game *game)
 {
 	int my;
 	int mx;
-	int next_step;
 
 	my = game->py - (game->pdy * 2);
 	mx = game->px - (game->pdx * 2);
@@ -54,7 +52,6 @@ int	left_handler(t_game *game)
 {
 	int my;
 	int mx;
-	int next_step;
 
 	my = game->py + (game->prly * 2);
 	mx = game->px + (game->prlx * 2);
@@ -73,7 +70,6 @@ int	right_handler(t_game *game)
 {
 	int my;
 	int mx;
-	int next_step;
 
 	my = game->py - (game->prly * 2);
 	mx = game->px - (game->prlx * 2);
@@ -90,29 +86,30 @@ int	right_handler(t_game *game)
 
 int	key_win(int key, t_game *game)
 {
-	if (key == 119)
+	printf("key %i\n", key);
+	if (key == 13)
 		if (forward_handler(game) == 0)
 			return (0);
-	if (key == 115)
+	if (key == 1)
 		if (back_handler(game) == 0)
 			return (0);
-	if (key == 100)
+	if (key == 2)
 		if (left_handler(game) == 0)
 			return (0);
-	if (key == 97)
+	if (key == 0)
 		if (right_handler(game) == 0)
 			return (0);
-	if (key == 65361)
+	if (key == 123)
 	{
 		game->pa = is_full_circle(game->pa - 0.05);
 		bias(game);
 	}
-	if (key == 65363)
+	if (key == 124)
 	{
 		game->pa = is_full_circle(game->pa + 0.05);
 		bias(game);
 	}
-	if (key == 65307)
+	if (key == 53)
 	{
 		destroy_game(1, game);
 		return (0);
@@ -120,4 +117,5 @@ int	key_win(int key, t_game *game)
 	drawrays3d(game);
 	mlx_put_image_to_window(game->mlx_init,
 	game->window, game->main_img.img, 0, 0);
+	return (0);
 }

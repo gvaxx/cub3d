@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroyer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
+/*   By: mcaptain <mcaptain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:49:37 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/28 16:31:04 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/29 15:35:57 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		destroy_game(int win, t_game *game)
 		mlx_destroy_image(game->mlx_init, game->texture_we.img);
 		map_destroyer(game->game_info.map, game->game_info.map_height);
 		mlx_destroy_window(game->mlx_init, game->window);
-		exit(0);
 	}
+	exit(0);
+	return (0);
 }

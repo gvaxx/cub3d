@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_raycasting.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaptain <mcaptain@msk-school21.ru>        +#+  +:+       +#+        */
+/*   By: mcaptain <mcaptain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 01:41:41 by mcaptain          #+#    #+#             */
-/*   Updated: 2020/06/25 14:04:14 by mcaptain         ###   ########.fr       */
+/*   Updated: 2020/06/29 16:09:04 by mcaptain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	print_img_pxl(char *img, unsigned int color)
 	}
 }
 
-void	replace_pixel(unsigned char *convert_img, unsigned char *source_img)
+void	replace_pixel(char *convert_img, char *source_img)
 {
 	if (source_img[0] == 0 && source_img[1] == 0 &&
-	source_img[2] == 0 && source_img[3] == 0)
+	source_img[2] == 0)
 		return ;
 	convert_img[0] = source_img[0];
 	convert_img[1] = source_img[1];
